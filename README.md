@@ -1,3 +1,6 @@
+# TODO
+- Add purgecss (https://dev.to/hagnerd/setting-up-tailwind-with-create-react-app-4jd)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
