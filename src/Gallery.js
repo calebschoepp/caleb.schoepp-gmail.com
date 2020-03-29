@@ -37,18 +37,20 @@ function Gallery() {
     setPhotoIdx(0);
 
     const fetchData = async () => {
+      // TODO add some form of caching here to reduce calls to api
+      // No need to call for posts that have already been fetched
       console.log("FETCHING PHOTOS WE ARE");
       let res;
       let topPost, midPost, botPost;
-      if (postIdx - 1 >= 0 && !photos.hasOwnProperty(postIdx - 1)) {
+      if (postIdx - 1 >= 0) {
         res = await getPost(posts[postIdx - 1]);
         topPost = [res.original, ...res.photoshops];
       }
-      if (!photos.hasOwnProperty(postIdx)) {
-        res = await getPost(posts[postIdx]);
-        midPost = [res.original, ...res.photoshops];
-      }
-      if (postIdx + 1 < posts.length && !photos.hasOwnProperty(postIdx)) {
+
+      res = await getPost(posts[postIdx]);
+      midPost = [res.original, ...res.photoshops];
+
+      if (postIdx + 1 < posts.length) {
         res = await getPost(posts[postIdx + 1]);
         botPost = [res.original, ...res.photoshops];
       }
@@ -101,8 +103,8 @@ function Gallery() {
             onClick={() => setPhotoIdx(photoIdx - 1)}
           />
           <MainImage
-            alt={photos[0] ? photos[postIdx][photoIdx].text : ""}
-            url={photos[0] ? photos[postIdx][photoIdx].url : ""}
+            alt={photos[postIdx] ? photos[postIdx][photoIdx].text : ""}
+            url={photos[postIdx] ? photos[postIdx][photoIdx].url : ""}
           />
           <PreviewImage
             display={photos[postIdx] && photoIdx < photos[postIdx].length - 1}
