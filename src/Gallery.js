@@ -18,7 +18,6 @@ function Gallery() {
     // Everytime category is changed:
     // load posts for category from api
     // reset post and photo indexes
-    console.log("loading categories");
     getCategory(category).then(res => {
       setPosts(res.posts);
       setPostIdx(0);
@@ -34,52 +33,44 @@ function Gallery() {
       // No posts loaded yet, don't do anything
       return;
     }
-    console.log("loading photos");
 
     setPhotoIdx(0);
 
-    let promiseChain = Promise.resolve();
-    let loadIdx = postIdx - 1;
-    if (loadIdx >= 0 && !photos.hasOwnProperty(loadIdx)) {
-      console.log("start");
-      // Load post in top row if not already loaded
-      promiseChain = promiseChain.then(() => {
-        getPost(posts[loadIdx]).then(res => {
-          let setObj = {};
-          setObj[loadIdx] = [res.original, ...res.photoshops];
-          setPhotos(setObj);
-        });
-      });
-    }
+    const fetchData = async () => {
+      console.log("FETCHING PHOTOS WE ARE");
+      let res;
+      let topPost, midPost, botPost;
+      if (postIdx - 1 >= 0 && !photos.hasOwnProperty(postIdx - 1)) {
+        res = await getPost(posts[postIdx - 1]);
+        topPost = [res.original, ...res.photoshops];
+      }
+      if (!photos.hasOwnProperty(postIdx)) {
+        res = await getPost(posts[postIdx]);
+        midPost = [res.original, ...res.photoshops];
+      }
+      if (postIdx + 1 < posts.length && !photos.hasOwnProperty(postIdx)) {
+        res = await getPost(posts[postIdx + 1]);
+        botPost = [res.original, ...res.photoshops];
+      }
 
-    loadIdx = postIdx;
-    if (!photos.hasOwnProperty(loadIdx)) {
-      console.log("middle");
-      // Load post in middle row if not already loaded
-      promiseChain = promiseChain.then(() => {
-        getPost(posts[loadIdx]).then(res => {
-          let setObj = {};
-          setObj[loadIdx] = [res.original, ...res.photoshops];
-          setPhotos(setObj);
-        });
-      });
-    }
+      let setObj = {};
+      let i;
+      if (topPost) {
+        i = postIdx - 1;
+        setObj[i] = topPost;
+      }
+      if (midPost) {
+        i = postIdx;
+        setObj[i] = midPost;
+      }
+      if (botPost) {
+        i = postIdx + 1;
+        setObj[i] = botPost;
+      }
+      setPhotos(setObj);
+    };
 
-    loadIdx = postIdx + 1;
-    if (loadIdx < posts.length && !photos.hasOwnProperty(loadIdx)) {
-      console.log("end");
-      // Load post in bottom row if not already loaded
-      promiseChain = promiseChain.then(() => {
-        getPost(posts[loadIdx]).then(res => {
-          let setObj = {};
-          setObj[loadIdx] = [res.original, ...res.photoshops];
-          setPhotos(setObj);
-        });
-      });
-    }
-    console.log("promiseChain");
-    console.log(promiseChain);
-    return promiseChain;
+    fetchData();
   }, [posts, postIdx]);
 
   console.log("------");
@@ -89,6 +80,7 @@ function Gallery() {
   // console.log(postIdx);
   // console.log("posts");
   // console.log(posts);
+  console.log(`postIdx: ${postIdx}  photoIdx: ${photoIdx}`);
   return (
     <>
       <CategoryPicker setCategory={setCategory} category={category} />
@@ -104,25 +96,27 @@ function Gallery() {
         <div className="flex flex-row justify-center items-center">
           <PreviewImage
             display={photoIdx > 0}
-            alt={photos[0] && photoIdx > 0 ? photos[photoIdx - 1].text : ""}
-            url={photos[0] && photoIdx > 0 ? photos[photoIdx - 1].url : ""}
+            alt={photoIdx > 0 && photos[postIdx][photoIdx - 1].text}
+            url={photoIdx > 0 && photos[postIdx][photoIdx - 1].url}
             onClick={() => setPhotoIdx(photoIdx - 1)}
           />
           <MainImage
-            alt={photos[0] ? photos[photoIdx].text : ""}
-            url={photos[0] ? photos[photoIdx].url : ""}
+            alt={photos[0] ? photos[postIdx][photoIdx].text : ""}
+            url={photos[0] ? photos[postIdx][photoIdx].url : ""}
           />
           <PreviewImage
-            display={photoIdx < photos.length}
+            display={photos[postIdx] && photoIdx < photos[postIdx].length - 1}
             alt={
-              photos[0] && photoIdx < posts.length
-                ? photos[photoIdx + 1].text
-                : ""
+              photos[postIdx] &&
+              photos[postIdx][photoIdx + 1] &&
+              photoIdx < photos[postIdx].length + 1 &&
+              photos[postIdx][photoIdx + 1].text
             }
             url={
-              photos[0] && photoIdx < posts.legnth
-                ? photos[photoIdx + 1].url
-                : ""
+              photos[postIdx] &&
+              photos[postIdx][photoIdx + 1] &&
+              photoIdx < photos[postIdx].length + 1 &&
+              photos[postIdx][photoIdx + 1].url
             }
             onClick={() => setPhotoIdx(photoIdx + 1)}
           />
@@ -130,12 +124,12 @@ function Gallery() {
         <PreviewImage
           display={postIdx < posts.length - 1}
           alt={
-            postIdx < posts.length - 1 &&
+            postIdx < posts.length + 1 &&
             photos[postIdx + 1] &&
             photos[postIdx + 1][0].text
           }
           url={
-            postIdx < posts.length - 1 &&
+            postIdx < posts.length + 1 &&
             photos[postIdx + 1] &&
             photos[postIdx + 1][0].url
           }

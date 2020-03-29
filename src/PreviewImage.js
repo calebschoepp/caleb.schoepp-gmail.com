@@ -12,7 +12,7 @@ function PreviewImage(props) {
       ></img>
     );
   }
-  return null;
+  return <div className="bg-gray-500 w-64 h-64 mx-auto my-32"></div>;
 }
 
 export default PreviewImage;
