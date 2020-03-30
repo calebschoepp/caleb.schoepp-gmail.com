@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = "https://vast-coast-69232.herokuapp.com";
+const baseURL = "https://ez-photoshopbattles-api.herokuapp.com";
 
 // TODO catch errors from api calls
 

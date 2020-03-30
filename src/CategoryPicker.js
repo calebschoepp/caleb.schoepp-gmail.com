@@ -1,7 +1,7 @@
 import React from "react";
 import CategoryLink from "./CategoryLink.js";
 
-const categories = ["hot", "new", "top", "rising"];
+const categories = ["hot", "new", "top:week", "rising"];
 
 function CategoryPicker(props) {
   const { category: currentCategory, setCategory } = props;

@@ -8,7 +8,7 @@ import { getCategory, getPost } from "./api.js";
 
 function Gallery() {
   // State
-  const [category, setCategory] = useState("hot");
+  const [category, setCategory] = useState("top:week");
   const [posts, setPosts] = useState([]);
   const [photos, setPhotos] = useState({}); // Map of postIdx to array of photos objects
   const [postIdx, setPostIdx] = useState(0);
@@ -75,14 +75,14 @@ function Gallery() {
     fetchData();
   }, [posts, postIdx]);
 
-  console.log("------");
-  console.log("photos");
-  console.log(photos);
+  // console.log("------");
+  // console.log("photos");
+  // console.log(photos);
   // console.log("postIdx");
   // console.log(postIdx);
   // console.log("posts");
   // console.log(posts);
-  console.log(`postIdx: ${postIdx}  photoIdx: ${photoIdx}`);
+  // console.log(`postIdx: ${postIdx}  photoIdx: ${photoIdx}`);
   return (
     <>
       <CategoryPicker setCategory={setCategory} category={category} />
@@ -90,21 +90,47 @@ function Gallery() {
         <PreviewImage
           display={postIdx > 0}
           alt={
-            postIdx > 0 && photos[postIdx - 1] && photos[postIdx - 1][0].text
+            postIdx > 0 &&
+            photos[postIdx - 1] &&
+            photos[postIdx - 1][0] &&
+            photos[postIdx - 1][0].text
           }
-          url={postIdx > 0 && photos[postIdx - 1] && photos[postIdx - 1][0].url}
+          url={
+            postIdx > 0 &&
+            photos[postIdx - 1] &&
+            photos[postIdx - 1][0] &&
+            photos[postIdx - 1][0].url
+          }
           onClick={() => setPostIdx(postIdx - 1)}
         />
         <div className="flex flex-row justify-center items-center">
           <PreviewImage
             display={photoIdx > 0}
-            alt={photoIdx > 0 && photos[postIdx][photoIdx - 1].text}
-            url={photoIdx > 0 && photos[postIdx][photoIdx - 1].url}
+            alt={
+              photos[postIdx] &&
+              photos[postIdx][photoIdx - 1] &&
+              photoIdx > 0 &&
+              photos[postIdx][photoIdx - 1].text
+            }
+            url={
+              photos[postIdx] &&
+              photos[postIdx][photoIdx - 1] &&
+              photoIdx > 0 &&
+              photos[postIdx][photoIdx - 1].url
+            }
             onClick={() => setPhotoIdx(photoIdx - 1)}
           />
           <MainImage
-            alt={photos[postIdx] ? photos[postIdx][photoIdx].text : ""}
-            url={photos[postIdx] ? photos[postIdx][photoIdx].url : ""}
+            alt={
+              photos[postIdx] &&
+              photos[postIdx][photoIdx] &&
+              photos[postIdx][photoIdx].text
+            }
+            url={
+              photos[postIdx] &&
+              photos[postIdx][photoIdx] &&
+              photos[postIdx][photoIdx].url
+            }
           />
           <PreviewImage
             display={photos[postIdx] && photoIdx < photos[postIdx].length - 1}
@@ -128,11 +154,13 @@ function Gallery() {
           alt={
             postIdx < posts.length + 1 &&
             photos[postIdx + 1] &&
+            photos[postIdx + 1][0] &&
             photos[postIdx + 1][0].text
           }
           url={
             postIdx < posts.length + 1 &&
             photos[postIdx + 1] &&
+            photos[postIdx + 1][0] &&
             photos[postIdx + 1][0].url
           }
           onClick={() => setPostIdx(postIdx + 1)}
