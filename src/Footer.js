@@ -3,7 +3,9 @@ import React from "react";
 function Footer() {
   return (
     <div>
-      <p>&copy; Caleb Schoepp &middot; 2020</p>
+      <p>
+        Made with &hearts; by <a href="https://calebschoepp.com">Caleb</a>
+      </p>
     </div>
   );
 }
