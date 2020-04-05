@@ -2,46 +2,31 @@ import React, { useState } from "react";
 
 import InfiniteScroller from "./InfiniteScroller.js";
 
-function InfiniteScrollerContainer({ category }) {
-  // TODO maybe pull category up one level of abstraction
-  const [isNextPostLoading, setIsNextPostLoading] = useState(false);
-  const [postObjects, setPostObjects] = useState([
-    "test/a.jpg",
-    "test/b.jpg",
-    "test/c.jpg",
-    "test/d.png",
-  ]);
-  let postIDs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+function InfiniteScrollerContainer({ postIDs }) {
+  const [posts, setPosts] = useState({});
 
   const loadNextPost = ({ startIndex, stopIndex }) => {
     console.log(`start:${startIndex} stop:${stopIndex}`);
-    // console.log(startIndex);
-    setIsNextPostLoading(true);
-    // console.log("loading");
     return new Promise((resolve, reject) => {
+      let postsToAdd = {};
       setTimeout(() => {
-        let toAdd = [];
-        for (let i = 0; i < stopIndex - startIndex; ++i) {
-          toAdd.push("test/a.jpg");
+        for (let i = startIndex; i <= stopIndex; ++i) {
+          console.log(posts);
+          if (!!posts[i]) {
+            // Post is already loaded
+            console.log("overlap");
+            continue;
+          }
+          postsToAdd[i] = "test/a.jpg";
         }
-        setPostObjects([...postObjects, ...toAdd]);
-        setIsNextPostLoading(false);
+        setPosts({ ...posts, ...postsToAdd });
         resolve("Done");
-      }, 2000);
+      }, 800);
     });
   };
 
-  const hasNextPost = () => {
-    return true;
-  };
-
   return (
-    <InfiniteScroller
-      postObjects={postObjects}
-      hasNextPost={hasNextPost()}
-      isNextPostLoading={isNextPostLoading}
-      loadNextPost={loadNextPost}
-    />
+    <InfiniteScroller posts={posts} loadNextPost={loadNextPost} rowCount={20} />
   );
 }
 

@@ -3,24 +3,9 @@ import { InfiniteLoader, WindowScroller, List } from "react-virtualized";
 
 import PostCard from "./PostCard.js";
 
-function InfiniteScroller({
-  postObjects,
-  hasNextPost,
-  isNextPostLoading,
-  loadNextPost,
-}) {
-  // console.log(postObjects, hasNextPost, isNextPostLoading);
-  // If there are more items to be loaded then add an extra row to hold a loading indicator.
-  const rowCount = 20;
-
-  // Only load 1 page of items at a time.
-  // Pass an empty callback to InfiniteLoader in case it asks us to load more than once.
-  const loadMoreRows = isNextPostLoading ? () => {} : loadNextPost;
-
-  // Every row is loaded except for our loading indicator row.
+function InfiniteScroller({ posts, loadNextPost, rowCount }) {
   const isRowLoaded = ({ index }) => {
-    // console.log(`${index}:${!hasNextPost || index < postObjects.length}`);
-    return !hasNextPost || index < postObjects.length;
+    return !!posts[index];
   };
 
   // Render a list item or a loading indicator.
@@ -30,7 +15,7 @@ function InfiniteScroller({
     if (!isRowLoaded({ index })) {
       content = "Loading...";
     } else {
-      content = <PostCard url={postObjects[index]} />;
+      content = <PostCard url={posts[index]} />;
     }
 
     return (
@@ -43,8 +28,6 @@ function InfiniteScroller({
   // TODO find better way to do item height
   const heights = [791, 747, 791, 777, 791];
 
-  // const infiniteLoaderRef = useRef(null);
-
   const calculateRowHeight = ({ index }) => {
     return heights[index];
   };
@@ -52,12 +35,11 @@ function InfiniteScroller({
   return (
     <div className="mx-auto border-black border-8 max-w-3xl">
       <InfiniteLoader
-        // ref={infiniteLoaderRef} TODO remove this I think
         rowCount={rowCount}
         isRowLoaded={isRowLoaded}
-        loadMoreRows={loadMoreRows}
-        minimumBatchSize={1}
-        threshold={15}
+        loadMoreRows={loadNextPost}
+        minimumBatchSize={2} // TODO tune this value
+        threshold={1} // TODO tune this value
       >
         {({ onRowsRendered, registerChild }) => (
           <WindowScroller>
