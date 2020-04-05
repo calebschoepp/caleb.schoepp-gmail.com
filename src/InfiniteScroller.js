@@ -3,7 +3,12 @@ import { InfiniteLoader, WindowScroller, List } from "react-virtualized";
 
 import PostCard from "./PostCard.js";
 
+const LOADING_CARD_HEIGHT = 600;
+
 function InfiniteScroller({ posts, loadNextPost, rowCount }) {
+  console.log("inside");
+  console.log(posts);
+  // console.log(rowCount);
   const isRowLoaded = ({ index }) => {
     return !!posts[index];
   };
@@ -15,21 +20,22 @@ function InfiniteScroller({ posts, loadNextPost, rowCount }) {
     if (!isRowLoaded({ index })) {
       content = "Loading...";
     } else {
-      content = <PostCard url={posts[index]} />;
+      content = <PostCard url={posts[index].url} />;
     }
 
     return (
-      <div key={key} style={style}>
+      <div className="border-4 border-red-900" key={key} style={style}>
         {content}
       </div>
     );
   };
 
-  // TODO find better way to do item height
-  const heights = [791, 747, 791, 777, 791];
-
   const calculateRowHeight = ({ index }) => {
-    return heights[index];
+    if (!!posts[index]) {
+      return posts[index].maxHeight;
+    } else {
+      return LOADING_CARD_HEIGHT;
+    }
   };
 
   return (
@@ -54,7 +60,7 @@ function InfiniteScroller({ posts, loadNextPost, rowCount }) {
                   onScroll={onChildScroll} // ^
                   scrollTop={scrollTop} // ^
                   rowCount={rowCount}
-                  rowHeight={800}
+                  rowHeight={1000}
                   onRowsRendered={onRowsRendered}
                   rowRenderer={rowRenderer}
                 />
