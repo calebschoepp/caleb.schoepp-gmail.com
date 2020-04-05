@@ -11,8 +11,7 @@ function InfiniteScroller({
 }) {
   // console.log(postObjects, hasNextPost, isNextPostLoading);
   // If there are more items to be loaded then add an extra row to hold a loading indicator.
-  const rowCount = hasNextPost ? postObjects.length + 4 : postObjects.length;
-  console.log(rowCount);
+  const rowCount = 20;
 
   // Only load 1 page of items at a time.
   // Pass an empty callback to InfiniteLoader in case it asks us to load more than once.
@@ -58,7 +57,7 @@ function InfiniteScroller({
         isRowLoaded={isRowLoaded}
         loadMoreRows={loadMoreRows}
         minimumBatchSize={1}
-        threshold={4}
+        threshold={15}
       >
         {({ onRowsRendered, registerChild }) => (
           <WindowScroller>

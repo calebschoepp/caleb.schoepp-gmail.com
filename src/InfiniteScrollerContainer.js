@@ -15,20 +15,24 @@ function InfiniteScrollerContainer({ category }) {
 
   const loadNextPost = ({ startIndex, stopIndex }) => {
     console.log(`start:${startIndex} stop:${stopIndex}`);
-    console.log(startIndex);
+    // console.log(startIndex);
     setIsNextPostLoading(true);
-    console.log("loading");
+    // console.log("loading");
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        setPostObjects([...postObjects, "test/a.jpg"]);
+        let toAdd = [];
+        for (let i = 0; i < stopIndex - startIndex; ++i) {
+          toAdd.push("test/a.jpg");
+        }
+        setPostObjects([...postObjects, ...toAdd]);
         setIsNextPostLoading(false);
         resolve("Done");
-      }, 800);
+      }, 2000);
     });
   };
 
   const hasNextPost = () => {
-    return postObjects.length < postIDs.length;
+    return true;
   };
 
   return (
