@@ -14,13 +14,9 @@ function InfiniteScrollerContainer({ postIDs }) {
   const listRef = useRef(null);
 
   useEffect(() => {
-    console.log("effect");
     setPosts({});
     setPostsLength(0);
     infiniteLoaderRef.current.resetLoadMoreRowsCache(false);
-    console.log(listRef.current);
-    console.log(infiniteLoaderRef.current);
-    listRef.current.scrollToPosition(1000);
   }, [postIDs]);
 
   const loadNextPost = ({ startIndex, stopIndex }) => {
@@ -59,7 +55,6 @@ function InfiniteScrollerContainer({ postIDs }) {
       loadNextPost={loadNextPost}
       rowCount={rowCount()}
       infiniteLoaderRef={infiniteLoaderRef}
-      listRef={listRef}
     />
   );
 }

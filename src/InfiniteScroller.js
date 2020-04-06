@@ -11,7 +11,6 @@ function InfiniteScroller({
   loadNextPost,
   rowCount,
   infiniteLoaderRef,
-  listRef,
 }) {
   const isRowLoaded = ({ index }) => {
     return !!posts[index];
@@ -63,13 +62,11 @@ function InfiniteScroller({
               onChildScroll,
               scrollTop,
             }) => {
-              console.log(scrollTop);
               return (
                 <List
                   ref={composeRefs(
                     infiniteLoaderRegisterChild,
-                    windowScrollerRegisterChild,
-                    listRef
+                    windowScrollerRegisterChild
                   )}
                   width={640}
                   autoHeight
