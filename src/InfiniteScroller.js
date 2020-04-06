@@ -5,10 +5,12 @@ import PostCard from "./PostCard.js";
 
 const LOADING_CARD_HEIGHT = 600;
 
-function InfiniteScroller({ posts, loadNextPost, rowCount }) {
-  console.log("inside");
-  console.log(posts);
-  // console.log(rowCount);
+function InfiniteScroller({
+  posts,
+  loadNextPost,
+  rowCount,
+  infiniteLoaderRef,
+}) {
   const isRowLoaded = ({ index }) => {
     return !!posts[index];
   };
@@ -41,6 +43,7 @@ function InfiniteScroller({ posts, loadNextPost, rowCount }) {
   return (
     <div className="mx-auto border-black border-8 max-w-3xl">
       <InfiniteLoader
+        ref={infiniteLoaderRef}
         rowCount={rowCount}
         isRowLoaded={isRowLoaded}
         loadMoreRows={loadNextPost}
@@ -60,7 +63,7 @@ function InfiniteScroller({ posts, loadNextPost, rowCount }) {
                   onScroll={onChildScroll} // ^
                   scrollTop={scrollTop} // ^
                   rowCount={rowCount}
-                  rowHeight={1000}
+                  rowHeight={calculateRowHeight}
                   onRowsRendered={onRowsRendered}
                   rowRenderer={rowRenderer}
                 />

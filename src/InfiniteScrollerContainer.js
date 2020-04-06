@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import InfiniteScroller from "./InfiniteScroller.js";
+
+import { getPost } from "./api.js";
 
 const NUMBER_LOADING_CARDS = 3;
 
@@ -8,30 +10,38 @@ function InfiniteScrollerContainer({ postIDs }) {
   const [posts, setPosts] = useState({});
   const [postsLength, setPostsLength] = useState(0);
 
+  const infiniteLoaderRef = useRef(null);
+
+  useEffect(() => {
+    console.log("effect");
+    setPosts({});
+    setPostsLength(0);
+    infiniteLoaderRef.current.resetLoadMoreRowsCache(false);
+  }, [postIDs]);
+
   const loadNextPost = ({ startIndex, stopIndex }) => {
     return new Promise((resolve, reject) => {
-      let newPosts = posts;
-      setTimeout(() => {
+      const fetchData = async () => {
+        console.log(startIndex, stopIndex);
+        let newPosts = posts;
         for (let i = startIndex; i <= stopIndex; ++i) {
-          // console.log(startIndex, stopIndex);
           if (!!posts[i]) {
-            console.log("overlap");
             // Post is already loaded
             continue;
           }
+          const res = await getPost(i); // TODO catch errors
+          console.log(res);
           newPosts[i] = { url: "test/a.jpg", maxHeight: 791 };
         }
         setPosts(newPosts);
         setPostsLength(postsLength + (stopIndex - startIndex + 1));
         resolve("Done");
-      }, 2000);
+      };
+      fetchData();
     });
   };
 
   const rowCount = () => {
-    // console.log(posts);
-    // const postsLength = Object.keys(posts).length;
-    // console.log(Object.keys(posts));
     if (postsLength < postIDs.length) {
       return Math.min(postsLength + NUMBER_LOADING_CARDS, postIDs.length);
     } else {
@@ -44,6 +54,7 @@ function InfiniteScrollerContainer({ postIDs }) {
       posts={posts}
       loadNextPost={loadNextPost}
       rowCount={rowCount()}
+      infiniteLoaderRef={infiniteLoaderRef}
     />
   );
 }

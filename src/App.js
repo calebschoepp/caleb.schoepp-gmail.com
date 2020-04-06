@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "./Header.js";
+import CategoryPickerContainer from "./CategoryPickerContainer.js";
 import InfiniteScrollerContainer from "./InfiniteScrollerContainer.js";
 import Footer from "./Footer.js";
 
 function App() {
+  const [postIDs, setPostIDs] = useState([]);
+  console.log(postIDs);
   return (
     <>
       <Header />
-      <InfiniteScrollerContainer postIDs={[1, 2, 3, 4, 5, 1, 2, 3, 4, 5]} />
+      <CategoryPickerContainer setPostIDs={setPostIDs} />
+      <InfiniteScrollerContainer postIDs={postIDs} />
       <Footer />
     </>
   );
