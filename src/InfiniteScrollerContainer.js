@@ -35,6 +35,7 @@ function InfiniteScrollerContainer({ postIDs }) {
         }
         setPosts(newPosts);
         setPostsLength(postsLength + (stopIndex - startIndex + 1));
+        listRef.current.recomputeRowHeights(startIndex);
         resolve("Done");
       };
       fetchData();
@@ -55,6 +56,7 @@ function InfiniteScrollerContainer({ postIDs }) {
       loadNextPost={loadNextPost}
       rowCount={rowCount()}
       infiniteLoaderRef={infiniteLoaderRef}
+      listRef={listRef}
     />
   );
 }

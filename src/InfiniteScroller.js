@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { InfiniteLoader, WindowScroller, List } from "react-virtualized";
 import composeRefs from "@seznam/compose-react-refs";
 
@@ -11,6 +11,7 @@ function InfiniteScroller({
   loadNextPost,
   rowCount,
   infiniteLoaderRef,
+  listRef,
 }) {
   const isRowLoaded = ({ index }) => {
     return !!posts[index];
@@ -66,7 +67,8 @@ function InfiniteScroller({
                 <List
                   ref={composeRefs(
                     infiniteLoaderRegisterChild,
-                    windowScrollerRegisterChild
+                    windowScrollerRegisterChild,
+                    listRef
                   )}
                   width={640}
                   autoHeight
