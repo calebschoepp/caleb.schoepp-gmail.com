@@ -6,7 +6,6 @@ import { getCategory } from "./api.js";
 
 const categories = [
   "hot",
-  "new",
   "top:day",
   "top:week",
   "top:month",

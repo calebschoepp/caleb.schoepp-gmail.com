@@ -30,8 +30,7 @@ function InfiniteScrollerContainer({ postIDs }) {
             continue;
           }
           const res = await getPost(postIDs[i]); // TODO catch errors
-          // console.log({ ...res, maxHeight: 791 });
-          newPosts[i] = { ...res, maxHeight: 791 };
+          newPosts[i] = { ...res };
         }
         setPosts(newPosts);
         setPostsLength(postsLength + (stopIndex - startIndex + 1));

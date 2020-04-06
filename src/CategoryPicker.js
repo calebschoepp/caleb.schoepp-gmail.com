@@ -3,20 +3,19 @@ import CategoryLink from "./CategoryLink.js";
 
 const categories = [
   "hot",
-  "new",
   "top:day",
   "top:week",
   "top:month",
   "top:year",
   "top:all",
-  "rising"
+  "rising",
 ];
 
 function CategoryPicker(props) {
   const { category: currentCategory, setCategory } = props;
   return (
     <div className="flex flex-row justify-center content-center">
-      {categories.map(category => {
+      {categories.map((category) => {
         return (
           <CategoryLink
             name={category.toUpperCase()}
