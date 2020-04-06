@@ -1,5 +1,10 @@
 import React, { useRef } from "react";
-import { InfiniteLoader, WindowScroller, List } from "react-virtualized";
+import {
+  AutoSizer,
+  InfiniteLoader,
+  WindowScroller,
+  List,
+} from "react-virtualized";
 import composeRefs from "@seznam/compose-react-refs";
 
 import PostCard from "./PostCard.js";
@@ -23,14 +28,12 @@ function InfiniteScroller({
 
     if (!isRowLoaded({ index })) {
       content = "Loading...";
-    } else if (posts[index].original) {
-      content = <PostCard url={posts[index].original.url} />;
-    } else {
-      content = "Missing original..."; // TODO handle this case better
+    } else if (posts[index]) {
+      content = <PostCard post={posts[index]} />;
     }
 
     return (
-      <div className="border-4 border-red-900" key={key} style={style}>
+      <div className="" key={key} style={style}>
         {content}
       </div>
     );
@@ -45,47 +48,53 @@ function InfiniteScroller({
   };
 
   return (
-    <div className="mx-auto border-black border-8 max-w-3xl">
-      <InfiniteLoader
-        ref={infiniteLoaderRef}
-        rowCount={rowCount}
-        isRowLoaded={isRowLoaded}
-        loadMoreRows={loadNextPost}
-        minimumBatchSize={2} // TODO tune this value
-        threshold={1} // TODO tune this value
-      >
-        {({ onRowsRendered, infiniteLoaderRegisterChild }) => (
-          <WindowScroller>
-            {({
-              height,
-              isScrolling,
-              windowScrollerRegisterChild,
-              onChildScroll,
-              scrollTop,
-            }) => {
-              return (
-                <List
-                  ref={composeRefs(
-                    infiniteLoaderRegisterChild,
+    <div className="mx-auto max-w-3xl border border-black">
+      <AutoSizer disableHeight>
+        {({ width }) => {
+          return (
+            <InfiniteLoader
+              ref={infiniteLoaderRef}
+              rowCount={rowCount}
+              isRowLoaded={isRowLoaded}
+              loadMoreRows={loadNextPost}
+              minimumBatchSize={2} // TODO tune this value
+              threshold={1} // TODO tune this value
+            >
+              {({ onRowsRendered, infiniteLoaderRegisterChild }) => (
+                <WindowScroller>
+                  {({
+                    height,
+                    isScrolling,
                     windowScrollerRegisterChild,
-                    listRef
-                  )}
-                  width={640}
-                  autoHeight
-                  height={height}
-                  isScrolling={isScrolling} // Don't think I need these
-                  onScroll={onChildScroll} // ^
-                  scrollTop={scrollTop} // ^
-                  rowCount={rowCount}
-                  rowHeight={calculateRowHeight}
-                  onRowsRendered={onRowsRendered}
-                  rowRenderer={rowRenderer}
-                />
-              );
-            }}
-          </WindowScroller>
-        )}
-      </InfiniteLoader>
+                    onChildScroll,
+                    scrollTop,
+                  }) => {
+                    return (
+                      <List
+                        ref={composeRefs(
+                          infiniteLoaderRegisterChild,
+                          windowScrollerRegisterChild,
+                          listRef
+                        )}
+                        width={width}
+                        autoHeight
+                        height={height}
+                        isScrolling={isScrolling} // Don't think I need these
+                        onScroll={onChildScroll} // ^
+                        scrollTop={scrollTop} // ^
+                        rowCount={rowCount}
+                        rowHeight={calculateRowHeight}
+                        onRowsRendered={onRowsRendered}
+                        rowRenderer={rowRenderer}
+                      />
+                    );
+                  }}
+                </WindowScroller>
+              )}
+            </InfiniteLoader>
+          );
+        }}
+      </AutoSizer>
     </div>
   );
 }

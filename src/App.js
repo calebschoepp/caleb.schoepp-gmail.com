@@ -6,7 +6,6 @@ import Footer from "./Footer.js";
 
 function App() {
   const [postIDs, setPostIDs] = useState([]);
-  console.log(postIDs);
   return (
     <>
       <Header />
