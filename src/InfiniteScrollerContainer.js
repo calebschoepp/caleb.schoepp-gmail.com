@@ -11,27 +11,31 @@ function InfiniteScrollerContainer({ postIDs }) {
   const [postsLength, setPostsLength] = useState(0);
 
   const infiniteLoaderRef = useRef(null);
+  const listRef = useRef(null);
 
   useEffect(() => {
     console.log("effect");
     setPosts({});
     setPostsLength(0);
     infiniteLoaderRef.current.resetLoadMoreRowsCache(false);
+    console.log(listRef.current);
+    console.log(infiniteLoaderRef.current);
+    listRef.current.scrollToPosition(1000);
   }, [postIDs]);
 
   const loadNextPost = ({ startIndex, stopIndex }) => {
     return new Promise((resolve, reject) => {
       const fetchData = async () => {
-        console.log(startIndex, stopIndex);
+        // console.log(startIndex, stopIndex);
         let newPosts = posts;
         for (let i = startIndex; i <= stopIndex; ++i) {
           if (!!posts[i]) {
             // Post is already loaded
             continue;
           }
-          const res = await getPost(i); // TODO catch errors
-          console.log(res);
-          newPosts[i] = { url: "test/a.jpg", maxHeight: 791 };
+          const res = await getPost(postIDs[i]); // TODO catch errors
+          // console.log({ ...res, maxHeight: 791 });
+          newPosts[i] = { ...res, maxHeight: 791 };
         }
         setPosts(newPosts);
         setPostsLength(postsLength + (stopIndex - startIndex + 1));
@@ -55,6 +59,7 @@ function InfiniteScrollerContainer({ postIDs }) {
       loadNextPost={loadNextPost}
       rowCount={rowCount()}
       infiniteLoaderRef={infiniteLoaderRef}
+      listRef={listRef}
     />
   );
 }

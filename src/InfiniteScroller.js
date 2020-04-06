@@ -1,15 +1,17 @@
 import React from "react";
 import { InfiniteLoader, WindowScroller, List } from "react-virtualized";
+import composeRefs from "@seznam/compose-react-refs";
 
 import PostCard from "./PostCard.js";
 
-const LOADING_CARD_HEIGHT = 600;
+const LOADING_CARD_HEIGHT = 300;
 
 function InfiniteScroller({
   posts,
   loadNextPost,
   rowCount,
   infiniteLoaderRef,
+  listRef,
 }) {
   const isRowLoaded = ({ index }) => {
     return !!posts[index];
@@ -21,8 +23,10 @@ function InfiniteScroller({
 
     if (!isRowLoaded({ index })) {
       content = "Loading...";
+    } else if (posts[index].original) {
+      content = <PostCard url={posts[index].original.url} />;
     } else {
-      content = <PostCard url={posts[index].url} />;
+      content = "Missing original..."; // TODO handle this case better
     }
 
     return (
@@ -50,12 +54,23 @@ function InfiniteScroller({
         minimumBatchSize={2} // TODO tune this value
         threshold={1} // TODO tune this value
       >
-        {({ onRowsRendered, registerChild }) => (
+        {({ onRowsRendered, infiniteLoaderRegisterChild }) => (
           <WindowScroller>
-            {({ height, isScrolling, onChildScroll, scrollTop }) => {
+            {({
+              height,
+              isScrolling,
+              windowScrollerRegisterChild,
+              onChildScroll,
+              scrollTop,
+            }) => {
+              console.log(scrollTop);
               return (
                 <List
-                  ref={registerChild}
+                  ref={composeRefs(
+                    infiniteLoaderRegisterChild,
+                    windowScrollerRegisterChild,
+                    listRef
+                  )}
                   width={640}
                   autoHeight
                   height={height}
