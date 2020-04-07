@@ -1,5 +1,7 @@
 import React, { useRef } from "react";
 import {
+  CellMeasurer,
+  CellMeasurerCache,
   AutoSizer,
   InfiniteLoader,
   WindowScroller,
@@ -23,32 +25,66 @@ function InfiniteScroller({
   };
 
   // Render a list item or a loading indicator.
-  const rowRenderer = ({ index, key, style }) => {
-    let content;
+  // const rowRenderer = ({ index, key, style }) => {
+  //   let content;
 
-    if (!isRowLoaded({ index })) {
-      content = "Loading...";
-    } else if (posts[index]) {
-      content = <PostCard post={posts[index]} />;
-    }
+  //   if (!isRowLoaded({ index })) {
+  //     content = "Loading...";
+  //   } else if (posts[index]) {
+  //     content = <PostCard post={posts[index]} />;
+  //   }
 
+  //   return (
+  //     <div className="" key={key} style={style}>
+  //       {content}
+  //     </div>
+  //   );
+  // };
+
+  const cache = new CellMeasurerCache({
+    defaultHeight: LOADING_CARD_HEIGHT,
+    fixedWidth: true,
+  });
+
+  function rowRenderer({ index, key, parent, style }) {
+    console.log(cache.rowHeight(index));
     return (
-      <div className="" key={key} style={style}>
-        {content}
-      </div>
-    );
-  };
+      <CellMeasurer
+        cache={cache}
+        columnIndex={0}
+        key={key}
+        parent={parent}
+        rowIndex={index}
+      >
+        {({ measure, registerChild }) => {
+          let content;
 
-  const calculateRowHeight = ({ index }) => {
-    if (!!posts[index]) {
-      return posts[index].maxHeight;
-    } else {
-      return LOADING_CARD_HEIGHT;
-    }
-  };
+          if (!isRowLoaded({ index })) {
+            content = "Loading...";
+          } else if (posts[index]) {
+            content = <PostCard post={posts[index]} onLoad={measure} />;
+          }
+
+          return (
+            <div className="" key={key} style={style} ref={registerChild}>
+              {content}
+            </div>
+          );
+        }}
+      </CellMeasurer>
+    );
+  }
+
+  // const calculateRowHeight = ({ index }) => {
+  //   if (!!posts[index]) {
+  //     return posts[index].maxHeight;
+  //   } else {
+  //     return LOADING_CARD_HEIGHT;
+  //   }
+  // };
 
   return (
-    <div className="mx-auto max-w-3xl border border-black">
+    <div className="mx-auto max-w-2xl border border-black">
       <AutoSizer disableHeight>
         {({ width }) => {
           return (
@@ -83,7 +119,8 @@ function InfiniteScroller({
                         onScroll={onChildScroll} // ^
                         scrollTop={scrollTop} // ^
                         rowCount={rowCount}
-                        rowHeight={calculateRowHeight}
+                        deferredMeasurementCache={cache}
+                        rowHeight={cache.rowHeight}
                         onRowsRendered={onRowsRendered}
                         rowRenderer={rowRenderer}
                       />

@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 
-function PostCard({ post }) {
+function PostCard({ post, onLoad }) {
   const [photoIndex, setPhotoIndex] = useState(0);
-  console.log(post);
-  console.log(photoIndex);
   return (
-    <div className="relative">
+    <div className="relative my-16">
       <img
         className="object-center block w-full"
         alt={"Photo"}
         src={post.photos[photoIndex] && post.photos[photoIndex].url}
+        onLoad={onLoad}
       ></img>
       {photoIndex > 0 && (
         <button
