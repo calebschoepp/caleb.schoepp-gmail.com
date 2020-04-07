@@ -4,7 +4,7 @@ import InfiniteScroller from "./InfiniteScroller.js";
 
 import { getPost } from "./api.js";
 
-const NUMBER_LOADING_CARDS = 1;
+const NUMBER_LOADING_CARDS = 3;
 
 function InfiniteScrollerContainer({ postIDs }) {
   const [posts, setPosts] = useState({});
