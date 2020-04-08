@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 
-import InfiniteScroller from "./InfiniteScroller.js";
+import InfiniteScroller from "../components/InfiniteScroller.js";
 
-import { getPost } from "./api.js";
+import { getPost } from "../api/api.js";
 
 const NUMBER_LOADING_CARDS = 3;
 

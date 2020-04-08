@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 
-import DesktopCategoryPicker from "./DesktopCategoryPicker";
+import DesktopCategoryPicker from "../components/DesktopCategoryPicker";
 
-import { getCategory } from "./api.js";
+import { getCategory } from "../api/api.js";
 
 const categories = [
   "hot",
