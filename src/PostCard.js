@@ -3,9 +3,9 @@ import React, { useState } from "react";
 function PostCard({ post }) {
   const [photoIndex, setPhotoIndex] = useState(0);
   return (
-    <div className="relative my-auto">
+    <div className="relative my-auto w-full">
       <img
-        className="object-center block w-full"
+        className="block w-full"
         alt={"Photo"}
         src={post.photos[photoIndex] && post.photos[photoIndex].url}
       ></img>

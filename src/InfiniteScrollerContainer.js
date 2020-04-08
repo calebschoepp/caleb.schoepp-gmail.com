@@ -19,6 +19,14 @@ function InfiniteScrollerContainer({ postIDs }) {
     infiniteLoaderRef.current.resetLoadMoreRowsCache(false);
   }, [postIDs]);
 
+  useEffect(() => {
+    const handleResize = () => listRef.current.recomputeRowHeights(0);
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  });
+
   const loadNextPost = ({ startIndex, stopIndex }) => {
     return new Promise((resolve, reject) => {
       const fetchData = async () => {

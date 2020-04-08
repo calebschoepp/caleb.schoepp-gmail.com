@@ -41,7 +41,7 @@ function InfiniteScroller({
   };
 
   return (
-    <div className="mx-auto max-w-3xl border border-black">
+    <div className="mx-auto max-w-2xl">
       <AutoSizer disableHeight>
         {({ width }) => {
           const heightFromPost = (post) => {
