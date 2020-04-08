@@ -71,7 +71,7 @@ function InfiniteScroller({
               isRowLoaded={isRowLoaded}
               loadMoreRows={loadNextPost}
               minimumBatchSize={2} // TODO tune this value
-              threshold={1} // TODO tune this value
+              threshold={2} // TODO tune this value
             >
               {({ onRowsRendered, infiniteLoaderRegisterChild }) => (
                 <WindowScroller>
