@@ -22,7 +22,6 @@ function InfiniteScrollerContainer({ postIDs }) {
   const loadNextPost = ({ startIndex, stopIndex }) => {
     return new Promise((resolve, reject) => {
       const fetchData = async () => {
-        // console.log(startIndex, stopIndex);
         let newPosts = posts;
         for (let i = startIndex; i <= stopIndex; ++i) {
           if (!!posts[i]) {
@@ -34,6 +33,7 @@ function InfiniteScrollerContainer({ postIDs }) {
         }
         setPosts(newPosts);
         setPostsLength(postsLength + (stopIndex - startIndex + 1));
+        console.log("newPosts", newPosts);
         listRef.current.recomputeRowHeights(startIndex);
         resolve("Done");
       };

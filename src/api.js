@@ -7,9 +7,9 @@ const baseURL = "https://ez-photoshopbattles-api.herokuapp.com";
 export function getCategory(category) {
   return axios
     .get(`${baseURL}/v1/categories/${category}`)
-    .then(res => res.data);
+    .then((res) => res.data);
 }
 
 export function getPost(post) {
-  return axios.get(`${baseURL}/v1/posts/${post}`).then(res => res.data);
+  return axios.get(`${baseURL}/v1/posts/${post}`).then((res) => res.data);
 }

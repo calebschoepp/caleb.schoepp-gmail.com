@@ -2,10 +2,8 @@ import React, { useState } from "react";
 
 function PostCard({ post }) {
   const [photoIndex, setPhotoIndex] = useState(0);
-  console.log(post);
-  console.log(photoIndex);
   return (
-    <div className="relative">
+    <div className="relative my-auto">
       <img
         className="object-center block w-full"
         alt={"Photo"}
