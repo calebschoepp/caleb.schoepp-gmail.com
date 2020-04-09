@@ -18,7 +18,6 @@ function InfiniteScroller({
   infiniteLoaderRef,
   listRef,
 }) {
-  console.log("propposts", posts);
   const isRowLoaded = ({ index }) => {
     return !!posts[index];
   };
@@ -34,7 +33,7 @@ function InfiniteScroller({
     }
 
     return (
-      <div className="flex flex-row" key={key} style={style}>
+      <div key={key} style={style}>
         {content}
       </div>
     );
