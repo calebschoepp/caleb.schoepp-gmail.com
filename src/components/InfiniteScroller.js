@@ -47,7 +47,7 @@ function InfiniteScroller({
   };
 
   return (
-    <div className="mx-auto max-w-2xl">
+    <div className="mx-auto max-w-2xl mt-16">
       <AutoSizer disableHeight>
         {({ width }) => {
           const photoWindowHeightFromPost = (post) => {
@@ -63,6 +63,7 @@ function InfiniteScroller({
           };
 
           const calculateRowHeight = ({ index }) => {
+            console.log("calc");
             if (!!posts[index]) {
               return (
                 photoWindowHeightFromPost(posts[index]) + CARD_HEIGHT_EXTRA

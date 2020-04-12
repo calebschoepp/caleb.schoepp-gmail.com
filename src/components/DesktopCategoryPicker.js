@@ -7,7 +7,7 @@ function CategoryPickerContainer({
   leftPosition,
 }) {
   return (
-    <div className="fixed" style={{ left: `${leftPosition}px`, top: "100px" }}>
+    <div className="fixed" style={{ left: `${leftPosition}px`, top: "80px" }}>
       {categories.map((c) => {
         const textContent = c === category ? <b>{c}</b> : c;
         return (

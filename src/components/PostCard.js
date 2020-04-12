@@ -6,10 +6,10 @@ function PostCard({ post }) {
   const [photoIndex, setPhotoIndex] = useState(0);
 
   return (
-    <div className="flex flex-col border h-full w-full">
+    <div className="flex flex-col border border-gray-300 h-full w-full">
       <div
         style={{ height: `${TITLE_BAR_SIZE}px` }}
-        className="border-b flex flex-row justify-start items-center"
+        className="bg-gray-100 flex flex-row justify-start items-center"
       >
         <span className="ml-1">{post.photos[photoIndex].text}</span>
         <span className="mx-2">|</span>
