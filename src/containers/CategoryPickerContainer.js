@@ -5,14 +5,15 @@ import DesktopCategoryPicker from "../components/DesktopCategoryPicker";
 import { getCategory } from "../util/api.js";
 import { CATEGORIES, DESKTOP_PICKER_GAP } from "../util/constants.js";
 
-function CategoryPickerContainer({ setPostIDs, width }) {
+function CategoryPickerContainer({ setPostIDs, scrollerWidth }) {
   const [category, setCategory] = useState("hot");
-  const [desktopPickerLeft, setDesktopPickerLeft] = useState(1355);
+  const [desktopPickerLeft, setDesktopPickerLeft] = useState(0);
 
   useEffect(() => {
     const handleResize = () => {
       const windowWidth = window.innerWidth;
-      const leftPosition = (windowWidth + width) / 2 + DESKTOP_PICKER_GAP;
+      const leftPosition =
+        (windowWidth + scrollerWidth) / 2 + DESKTOP_PICKER_GAP;
       setDesktopPickerLeft(leftPosition);
     };
     handleResize();
@@ -21,7 +22,7 @@ function CategoryPickerContainer({ setPostIDs, width }) {
       console.log("cleanup");
       window.removeEventListener("resize", handleResize);
     };
-  }, [width]);
+  }, [scrollerWidth]);
 
   useEffect(() => {
     const fetchData = async () => {

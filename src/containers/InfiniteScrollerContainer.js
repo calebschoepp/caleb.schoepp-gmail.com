@@ -5,7 +5,7 @@ import InfiniteScroller from "../components/InfiniteScroller.js";
 import { getPost } from "../util/api.js";
 import { NUMBER_LOADING_CARDS } from "../util/constants.js";
 
-function InfiniteScrollerContainer({ postIDs, setWidth }) {
+function InfiniteScrollerContainer({ postIDs, setScrollerWidth }) {
   const [posts, setPosts] = useState({});
   const [postsLength, setPostsLength] = useState(0);
 
@@ -62,7 +62,7 @@ function InfiniteScrollerContainer({ postIDs, setWidth }) {
       rowCount={rowCount()}
       infiniteLoaderRef={infiniteLoaderRef}
       listRef={listRef}
-      setScrollerWidth={setWidth}
+      setScrollerWidth={setScrollerWidth}
     />
   );
 }

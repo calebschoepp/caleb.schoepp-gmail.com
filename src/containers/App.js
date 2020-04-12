@@ -6,12 +6,18 @@ import Footer from "./Footer.js";
 
 function App() {
   const [postIDs, setPostIDs] = useState([]);
-  const [width, setWidth] = useState([]);
+  const [scrollerWidth, setScrollerWidth] = useState([]);
   return (
     <>
       <Header />
-      <CategoryPickerContainer setPostIDs={setPostIDs} width={width} />
-      <InfiniteScrollerContainer postIDs={postIDs} setWidth={setWidth} />
+      <CategoryPickerContainer
+        setPostIDs={setPostIDs}
+        scrollerWidth={scrollerWidth}
+      />
+      <InfiniteScrollerContainer
+        postIDs={postIDs}
+        setScrollerWidth={setScrollerWidth}
+      />
       <Footer />
     </>
   );
