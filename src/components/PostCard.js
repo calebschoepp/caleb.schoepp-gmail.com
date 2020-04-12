@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from "react";
 
-function PostCard({ post, titleBarSize, width, setScrollerWidth }) {
+import { TITLE_BAR_SIZE } from "../util/constants.js";
+
+function PostCard({ post }) {
   const [photoIndex, setPhotoIndex] = useState(0);
 
-  useEffect(() => {
-    setScrollerWidth(width);
-    console.log(width);
-  }, [width, setScrollerWidth]);
   return (
     <div className="flex flex-col border h-full w-full">
       <div
-        style={{ height: `${titleBarSize}px` }}
+        style={{ height: `${TITLE_BAR_SIZE}px` }}
         className="border-b flex flex-row justify-start items-center"
       >
         <span className="ml-1">{post.photos[photoIndex].text}</span>

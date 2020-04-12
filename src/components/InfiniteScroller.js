@@ -1,18 +1,14 @@
-import React, { useState, useEffect } from "react";
-import {
-  AutoSizer,
-  InfiniteLoader,
-  WindowScroller,
-  List,
-} from "react-virtualized";
-import composeRefs from "@seznam/compose-react-refs";
+import React from "react";
+import { AutoSizer, InfiniteLoader, WindowScroller } from "react-virtualized";
 
+import ListWrapper from "./ListWrapper.js";
 import PostCard from "./PostCard.js";
 
-const LOADING_CARD_HEIGHT = 300;
-const POSTCARD_SPACING = 20;
-const TITLE_BAR_SIZE = 40;
-const CARD_HEIGHT_EXTRA = 2 * POSTCARD_SPACING + TITLE_BAR_SIZE;
+import {
+  LOADING_CARD_HEIGHT,
+  POSTCARD_SPACING,
+  CARD_HEIGHT_EXTRA,
+} from "../util/constants.js";
 
 function InfiniteScroller({
   posts,
@@ -22,76 +18,38 @@ function InfiniteScroller({
   listRef,
   setScrollerWidth,
 }) {
-  // const [width, setWidth] = useState(0);
-
-  // useEffect(() => {
-  //   console.log("setting");
-  //   setScrollerWidth(width);
-  // }, [width]);
-
   const isRowLoaded = ({ index }) => {
     return !!posts[index];
   };
 
-  // // Render a list item or a loading indicator.
-  // const rowRenderer = ({ index, key, style }) => {
-  //   let content;
+  // Render a list item or a loading indicator.
+  const rowRenderer = ({ index, key, style }) => {
+    let content;
 
-  //   if (!isRowLoaded({ index })) {
-  //     content = "Loading...";
-  //   } else if (posts[index]) {
-  //     content = <PostCard post={posts[index]} titleBarSize={TITLE_BAR_SIZE} />;
-  //   }
+    if (!isRowLoaded({ index })) {
+      content = "Loading...";
+    } else if (posts[index]) {
+      content = <PostCard post={posts[index]} />;
+    }
 
-  //   return (
-  //     <div
-  //       key={key}
-  //       style={{
-  //         ...style,
-  //         paddingTop: `${POSTCARD_SPACING}px`,
-  //         paddingBottom: `${POSTCARD_SPACING}px`,
-  //       }} // TODO paramertarize this somewhere
-  //     >
-  //       {content}
-  //     </div>
-  //   );
-  // };
+    return (
+      <div
+        key={key}
+        style={{
+          ...style,
+          paddingTop: `${POSTCARD_SPACING}px`,
+          paddingBottom: `${POSTCARD_SPACING}px`,
+        }} // TODO paramertarize this somewhere
+      >
+        {content}
+      </div>
+    );
+  };
 
   return (
     <div className="mx-auto max-w-2xl">
       <AutoSizer disableHeight>
         {({ width }) => {
-          // Render a list item or a loading indicator.
-          const rowRenderer = ({ index, key, style }) => {
-            let content;
-
-            if (!isRowLoaded({ index })) {
-              content = "Loading...";
-            } else if (posts[index]) {
-              content = (
-                <PostCard
-                  post={posts[index]}
-                  titleBarSize={TITLE_BAR_SIZE}
-                  width={width}
-                  setScrollerWidth={setScrollerWidth}
-                />
-              );
-            }
-
-            return (
-              <div
-                key={key}
-                style={{
-                  ...style,
-                  paddingTop: `${POSTCARD_SPACING}px`,
-                  paddingBottom: `${POSTCARD_SPACING}px`,
-                }} // TODO paramertarize this somewhere
-              >
-                {content}
-              </div>
-            );
-          };
-
           const photoWindowHeightFromPost = (post) => {
             let maxHeight = 0;
             for (let photo of post.photos) {
@@ -133,12 +91,12 @@ function InfiniteScroller({
                     scrollTop,
                   }) => {
                     return (
-                      <List
-                        ref={composeRefs(
+                      <ListWrapper
+                        refs={[
                           infiniteLoaderRegisterChild,
                           windowScrollerRegisterChild,
-                          listRef
-                        )}
+                          listRef,
+                        ]}
                         width={width}
                         autoHeight
                         height={height}
@@ -149,6 +107,7 @@ function InfiniteScroller({
                         rowHeight={calculateRowHeight}
                         onRowsRendered={onRowsRendered}
                         rowRenderer={rowRenderer}
+                        setScrollerWidth={setScrollerWidth}
                       />
                     );
                   }}
