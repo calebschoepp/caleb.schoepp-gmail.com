@@ -1,7 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-function PostCard({ post, titleBarSize }) {
+function PostCard({ post, titleBarSize, width, setScrollerWidth }) {
   const [photoIndex, setPhotoIndex] = useState(0);
+
+  useEffect(() => {
+    setScrollerWidth(width);
+    console.log(width);
+  }, [width, setScrollerWidth]);
   return (
     <div className="flex flex-col border h-full w-full">
       <div

@@ -64,7 +64,7 @@ function InfiniteScrollerContainer({ postIDs, setWidth }) {
       rowCount={rowCount()}
       infiniteLoaderRef={infiniteLoaderRef}
       listRef={listRef}
-      setWidth={setWidth}
+      setScrollerWidth={setWidth}
     />
   );
 }

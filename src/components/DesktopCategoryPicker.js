@@ -12,7 +12,9 @@ function CategoryPickerContainer({
         const textContent = c === category ? <b>{c}</b> : c;
         return (
           <div key={c}>
-            <button onClick={() => setCategory(c)}>{textContent}</button>
+            <button className="text-xl" onClick={() => setCategory(c)}>
+              {textContent}
+            </button>
             <br />
           </div>
         );

@@ -3,13 +3,11 @@ import React, { useState, useEffect } from "react";
 import DesktopCategoryPicker from "../components/DesktopCategoryPicker";
 
 import { getCategory } from "../util/api.js";
-import { CATEGORIES } from "../util/constants.js";
-
-const DESKTOP_PICKER_GAP = 40;
+import { CATEGORIES, DESKTOP_PICKER_GAP } from "../util/constants.js";
 
 function CategoryPickerContainer({ setPostIDs, width }) {
   const [category, setCategory] = useState("hot");
-  const [desktopPickerLeft, setDesktopPickerLeft] = useState(0);
+  const [desktopPickerLeft, setDesktopPickerLeft] = useState(1355);
 
   useEffect(() => {
     const handleResize = () => {
@@ -17,6 +15,7 @@ function CategoryPickerContainer({ setPostIDs, width }) {
       const leftPosition = (windowWidth + width) / 2 + DESKTOP_PICKER_GAP;
       setDesktopPickerLeft(leftPosition);
     };
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => {
       console.log("cleanup");

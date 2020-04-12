@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   AutoSizer,
   InfiniteLoader,
@@ -20,41 +20,78 @@ function InfiniteScroller({
   rowCount,
   infiniteLoaderRef,
   listRef,
-  setWidth,
+  setScrollerWidth,
 }) {
+  // const [width, setWidth] = useState(0);
+
+  // useEffect(() => {
+  //   console.log("setting");
+  //   setScrollerWidth(width);
+  // }, [width]);
+
   const isRowLoaded = ({ index }) => {
     return !!posts[index];
   };
 
-  // Render a list item or a loading indicator.
-  const rowRenderer = ({ index, key, style }) => {
-    let content;
+  // // Render a list item or a loading indicator.
+  // const rowRenderer = ({ index, key, style }) => {
+  //   let content;
 
-    if (!isRowLoaded({ index })) {
-      content = "Loading...";
-    } else if (posts[index]) {
-      content = <PostCard post={posts[index]} titleBarSize={TITLE_BAR_SIZE} />;
-    }
+  //   if (!isRowLoaded({ index })) {
+  //     content = "Loading...";
+  //   } else if (posts[index]) {
+  //     content = <PostCard post={posts[index]} titleBarSize={TITLE_BAR_SIZE} />;
+  //   }
 
-    return (
-      <div
-        key={key}
-        style={{
-          ...style,
-          paddingTop: `${POSTCARD_SPACING}px`,
-          paddingBottom: `${POSTCARD_SPACING}px`,
-        }} // TODO paramertarize this somewhere
-      >
-        {content}
-      </div>
-    );
-  };
+  //   return (
+  //     <div
+  //       key={key}
+  //       style={{
+  //         ...style,
+  //         paddingTop: `${POSTCARD_SPACING}px`,
+  //         paddingBottom: `${POSTCARD_SPACING}px`,
+  //       }} // TODO paramertarize this somewhere
+  //     >
+  //       {content}
+  //     </div>
+  //   );
+  // };
 
   return (
     <div className="mx-auto max-w-2xl">
       <AutoSizer disableHeight>
         {({ width }) => {
-          setWidth(width);
+          // Render a list item or a loading indicator.
+          const rowRenderer = ({ index, key, style }) => {
+            let content;
+
+            if (!isRowLoaded({ index })) {
+              content = "Loading...";
+            } else if (posts[index]) {
+              content = (
+                <PostCard
+                  post={posts[index]}
+                  titleBarSize={TITLE_BAR_SIZE}
+                  width={width}
+                  setScrollerWidth={setScrollerWidth}
+                />
+              );
+            }
+
+            return (
+              <div
+                key={key}
+                style={{
+                  ...style,
+                  paddingTop: `${POSTCARD_SPACING}px`,
+                  paddingBottom: `${POSTCARD_SPACING}px`,
+                }} // TODO paramertarize this somewhere
+              >
+                {content}
+              </div>
+            );
+          };
+
           const photoWindowHeightFromPost = (post) => {
             let maxHeight = 0;
             for (let photo of post.photos) {
