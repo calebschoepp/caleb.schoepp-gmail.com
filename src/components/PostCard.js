@@ -15,7 +15,7 @@ function PostCard({ post }) {
             onClick={() => setPhotoIndex(photoIndex - 1)}
             className="rounded-full h-16 w-16 flex items-center justify-center bg-gray-200 absolute inset-y-0 left-0 my-auto ml-8"
           >
-            Left
+            {"<"}
           </button>
         )}
         {photoIndex < post.photos.length - 1 && (
@@ -23,7 +23,7 @@ function PostCard({ post }) {
             onClick={() => setPhotoIndex(photoIndex + 1)}
             className="rounded-full h-16 w-16 flex items-center justify-center bg-gray-200 absolute inset-y-0 right-0 my-auto mr-8"
           >
-            Right
+            {">"}
           </button>
         )}
       </div>

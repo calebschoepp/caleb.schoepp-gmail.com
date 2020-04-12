@@ -10,6 +10,7 @@ import composeRefs from "@seznam/compose-react-refs";
 import PostCard from "./PostCard.js";
 
 const LOADING_CARD_HEIGHT = 300;
+const POST_CARD_SPACING = 40;
 
 function InfiniteScroller({
   posts,
@@ -33,7 +34,10 @@ function InfiniteScroller({
     }
 
     return (
-      <div key={key} style={style}>
+      <div
+        key={key}
+        style={{ ...style, paddingTop: "20px", paddingBottom: "20px" }} // TODO paramertarize this somewhere
+      >
         {content}
       </div>
     );
@@ -43,7 +47,7 @@ function InfiniteScroller({
     <div className="mx-auto max-w-2xl">
       <AutoSizer disableHeight>
         {({ width }) => {
-          const heightFromPost = (post) => {
+          const photoWindowHeightFromPost = (post) => {
             let maxHeight = 0;
             for (let photo of post.photos) {
               const scaleFactor = width / photo.width;
@@ -57,9 +61,11 @@ function InfiniteScroller({
 
           const calculateRowHeight = ({ index }) => {
             if (!!posts[index]) {
-              return heightFromPost(posts[index]);
+              return (
+                photoWindowHeightFromPost(posts[index]) + POST_CARD_SPACING
+              );
             } else {
-              return LOADING_CARD_HEIGHT;
+              return LOADING_CARD_HEIGHT + POST_CARD_SPACING;
             }
           };
 
