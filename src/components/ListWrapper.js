@@ -16,7 +16,6 @@ function ListWrapper({
   setScrollerWidth,
 }) {
   useEffect(() => {
-    console.log(width);
     setScrollerWidth(width);
   }, [width, setScrollerWidth]);
 

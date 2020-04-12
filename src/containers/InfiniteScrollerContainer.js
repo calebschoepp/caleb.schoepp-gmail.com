@@ -40,7 +40,6 @@ function InfiniteScrollerContainer({ postIDs, setWidth }) {
         }
         setPosts(newPosts);
         setPostsLength(postsLength + (stopIndex - startIndex + 1));
-        console.log("newPosts", newPosts);
         listRef.current.recomputeRowHeights(startIndex);
         resolve("Done");
       };
