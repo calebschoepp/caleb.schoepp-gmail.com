@@ -10,7 +10,9 @@ import composeRefs from "@seznam/compose-react-refs";
 import PostCard from "./PostCard.js";
 
 const LOADING_CARD_HEIGHT = 300;
-const POST_CARD_SPACING = 40;
+const POSTCARD_SPACING = 20;
+const TITLE_BAR_SIZE = 40;
+const CARD_HEIGHT_EXTRA = 2 * POSTCARD_SPACING + TITLE_BAR_SIZE;
 
 function InfiniteScroller({
   posts,
@@ -30,13 +32,17 @@ function InfiniteScroller({
     if (!isRowLoaded({ index })) {
       content = "Loading...";
     } else if (posts[index]) {
-      content = <PostCard post={posts[index]} />;
+      content = <PostCard post={posts[index]} titleBarSize={TITLE_BAR_SIZE} />;
     }
 
     return (
       <div
         key={key}
-        style={{ ...style, paddingTop: "20px", paddingBottom: "20px" }} // TODO paramertarize this somewhere
+        style={{
+          ...style,
+          paddingTop: `${POSTCARD_SPACING}px`,
+          paddingBottom: `${POSTCARD_SPACING}px`,
+        }} // TODO paramertarize this somewhere
       >
         {content}
       </div>
@@ -62,10 +68,10 @@ function InfiniteScroller({
           const calculateRowHeight = ({ index }) => {
             if (!!posts[index]) {
               return (
-                photoWindowHeightFromPost(posts[index]) + POST_CARD_SPACING
+                photoWindowHeightFromPost(posts[index]) + CARD_HEIGHT_EXTRA
               );
             } else {
-              return LOADING_CARD_HEIGHT + POST_CARD_SPACING;
+              return LOADING_CARD_HEIGHT + CARD_HEIGHT_EXTRA;
             }
           };
 

@@ -1,9 +1,18 @@
 import React, { useState } from "react";
 
-function PostCard({ post }) {
+function PostCard({ post, titleBarSize }) {
   const [photoIndex, setPhotoIndex] = useState(0);
+  console.log(post.photos[photoIndex]);
   return (
-    <div className="flex flex-row border h-full w-full">
+    <div className="flex flex-col border h-full w-full">
+      <div
+        style={{ height: `${titleBarSize}px` }}
+        className="border-b flex flex-row justify-start items-center"
+      >
+        <span className="ml-1">{post.photos[photoIndex].text}</span>
+        <span className="mx-2">|</span>
+        <span>{post.photos[photoIndex].score}</span>
+      </div>
       <div className="relative my-auto w-full">
         <img
           className="block w-full"
