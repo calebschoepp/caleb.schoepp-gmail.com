@@ -2,11 +2,11 @@ import React, { useState, useEffect, useRef } from "react";
 
 import InfiniteScroller from "../components/InfiniteScroller.js";
 
-import { getPost } from "../api/api.js";
+import { getPost } from "../util/api.js";
 
 const NUMBER_LOADING_CARDS = 3;
 
-function InfiniteScrollerContainer({ postIDs }) {
+function InfiniteScrollerContainer({ postIDs, setWidth }) {
   const [posts, setPosts] = useState({});
   const [postsLength, setPostsLength] = useState(0);
 
@@ -64,6 +64,7 @@ function InfiniteScrollerContainer({ postIDs }) {
       rowCount={rowCount()}
       infiniteLoaderRef={infiniteLoaderRef}
       listRef={listRef}
+      setWidth={setWidth}
     />
   );
 }

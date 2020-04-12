@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import {
   AutoSizer,
   InfiniteLoader,
@@ -20,6 +20,7 @@ function InfiniteScroller({
   rowCount,
   infiniteLoaderRef,
   listRef,
+  setWidth,
 }) {
   const isRowLoaded = ({ index }) => {
     return !!posts[index];
@@ -53,6 +54,7 @@ function InfiniteScroller({
     <div className="mx-auto max-w-2xl">
       <AutoSizer disableHeight>
         {({ width }) => {
+          setWidth(width);
           const photoWindowHeightFromPost = (post) => {
             let maxHeight = 0;
             for (let photo of post.photos) {
