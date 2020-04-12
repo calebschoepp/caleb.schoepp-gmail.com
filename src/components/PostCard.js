@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 function PostCard({ post, titleBarSize }) {
   const [photoIndex, setPhotoIndex] = useState(0);
-  console.log(post.photos[photoIndex]);
   return (
     <div className="flex flex-col border h-full w-full">
       <div
