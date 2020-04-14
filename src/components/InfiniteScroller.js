@@ -47,7 +47,7 @@ function InfiniteScroller({
   };
 
   return (
-    <div className="mx-auto max-w-2xl mt-16">
+    <div className="mx-auto max-w-2xl pt-16">
       <AutoSizer disableHeight>
         {({ width }) => {
           const photoWindowHeightFromPost = (post) => {
