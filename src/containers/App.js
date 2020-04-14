@@ -9,7 +9,7 @@ function App() {
   const [postIDs, setPostIDs] = useState([]);
   const [scrollerWidth, setScrollerWidth] = useState([]);
   return (
-    <div className={`bg${BACKGROUND_COLOR}`}>
+    <div className={`bg${BACKGROUND_COLOR} font-bitter`}>
       <Header />
       <CategoryPickerContainer
         setPostIDs={setPostIDs}

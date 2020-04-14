@@ -22,4 +22,4 @@ export const CARD_HEIGHT_EXTRA = 2 * POSTCARD_SPACING + TITLE_BAR_SIZE;
 // Styling
 export const BORDER_COLOR = "-gray-400";
 export const BACKGROUND_COLOR = "-gray-100";
-export const FONT_COLOR = "-gray-700";
+export const FONT_COLOR = "-gray-800";
