@@ -1,7 +1,7 @@
 import React from "react";
 import { FONT_COLOR, BORDER_COLOR } from "../util/constants.js";
 
-function Header() {
+function Header({ setHamburgerOpen }) {
   return (
     <div
       className={`border-b border${BORDER_COLOR} fixed top-0 w-full z-30 bg-white`}
@@ -14,7 +14,11 @@ function Header() {
               photoshopbattles
             </span>
           </div>
-          <img className="pr-1 lg:hidden" src="/menu.svg"></img>
+          <img
+            className="pr-1 lg:hidden"
+            src="/menu.svg"
+            onClick={() => setHamburgerOpen(true)}
+          ></img>
         </div>
       </div>
     </div>

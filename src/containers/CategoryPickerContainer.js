@@ -6,7 +6,12 @@ import MobileCategoryPicker from "../components/MobileCategoryPicker.js";
 import { getCategory } from "../util/api.js";
 import { DESKTOP_PICKER_GAP } from "../util/constants.js";
 
-function CategoryPickerContainer({ setPostIDs, scrollerWidth }) {
+function CategoryPickerContainer({
+  setPostIDs,
+  scrollerWidth,
+  hamburgerOpen,
+  setHamburgerOpen,
+}) {
   const [category, setCategory] = useState("hot");
   const [desktopPickerLeft, setDesktopPickerLeft] = useState(0);
 
@@ -43,7 +48,14 @@ function CategoryPickerContainer({ setPostIDs, scrollerWidth }) {
     );
   }
 
-  return <MobileCategoryPicker category={category} setCategory={setCategory} />;
+  return (
+    <MobileCategoryPicker
+      category={category}
+      setCategory={setCategory}
+      isOpen={hamburgerOpen}
+      close={() => setHamburgerOpen(false)}
+    />
+  );
 }
 
 export default CategoryPickerContainer;

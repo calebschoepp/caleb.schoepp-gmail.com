@@ -8,12 +8,15 @@ import { BACKGROUND_COLOR } from "../util/constants.js";
 function App() {
   const [postIDs, setPostIDs] = useState([]);
   const [scrollerWidth, setScrollerWidth] = useState([]);
+  const [hamburgerOpen, setHamburgerOpen] = useState(false);
   return (
     <div className={`bg${BACKGROUND_COLOR} font-bitter`}>
-      <Header />
+      <Header setHamburgerOpen={setHamburgerOpen} />
       <CategoryPickerContainer
         setPostIDs={setPostIDs}
         scrollerWidth={scrollerWidth}
+        hamburgerOpen={hamburgerOpen}
+        setHamburgerOpen={setHamburgerOpen}
       />
       <InfiniteScrollerContainer
         postIDs={postIDs}
