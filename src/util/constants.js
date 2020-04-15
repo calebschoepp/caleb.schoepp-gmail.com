@@ -1,12 +1,13 @@
 // Auxillary
 export const CATEGORIES = [
-  "hot",
-  "top:day",
-  "top:week",
-  "top:month",
-  "top:year",
-  "top:all",
-  "rising",
+  { internalName: "hot", externalName: "Hot" },
+  { internalName: "new", externalName: "New" },
+  { internalName: "top:day", externalName: "Top ~ Today" },
+  { internalName: "top:week", externalName: "Top ~ This Week" },
+  { internalName: "top:month", externalName: "Top ~ This Month" },
+  { internalName: "top:year", externalName: "Top ~ This Year" },
+  { internalName: "top:all", externalName: "Top ~ All Time" },
+  { internalName: "rising", externalName: "Rising" },
 ];
 export const NUMBER_LOADING_CARDS = 3;
 

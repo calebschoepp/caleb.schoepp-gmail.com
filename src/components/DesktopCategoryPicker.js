@@ -1,18 +1,25 @@
 import React from "react";
+import { BORDER_COLOR, CATEGORIES } from "../util/constants";
 
-function CategoryPickerContainer({
-  category,
-  setCategory,
-  categories,
-  leftPosition,
-}) {
+function CategoryPickerContainer({ category, setCategory, leftPosition }) {
   return (
-    <div className="fixed" style={{ left: `${leftPosition}px`, top: "80px" }}>
-      {categories.map((c) => {
-        const textContent = c === category ? <b>{c}</b> : c;
+    <div
+      className={`fixed border border${BORDER_COLOR} bg-white p-2`}
+      style={{ left: `${leftPosition}px`, top: "80px" }}
+    >
+      {CATEGORIES.map((c) => {
+        const textContent =
+          c.internalName === category ? (
+            <b>{c.externalName}</b>
+          ) : (
+            c.externalName
+          );
         return (
-          <div key={c}>
-            <button className="text-xl" onClick={() => setCategory(c)}>
+          <div key={c.internalName}>
+            <button
+              className="text-xl"
+              onClick={() => setCategory(c.internalName)}
+            >
               {textContent}
             </button>
             <br />

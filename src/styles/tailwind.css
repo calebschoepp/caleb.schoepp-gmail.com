@@ -3701,6 +3701,10 @@ video {
   font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
+.font-bitter {
+  font-family: Bitter, sans-serif;
+}
+
 .font-hairline {
   font-weight: 100;
 }
@@ -16265,6 +16269,10 @@ video {
 
   .sm\:font-mono {
     font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  }
+
+  .sm\:font-bitter {
+    font-family: Bitter, sans-serif;
   }
 
   .sm\:font-hairline {
@@ -28834,6 +28842,10 @@ video {
     font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   }
 
+  .md\:font-bitter {
+    font-family: Bitter, sans-serif;
+  }
+
   .md\:font-hairline {
     font-weight: 100;
   }
@@ -41401,6 +41413,10 @@ video {
     font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   }
 
+  .lg\:font-bitter {
+    font-family: Bitter, sans-serif;
+  }
+
   .lg\:font-hairline {
     font-weight: 100;
   }
@@ -53966,6 +53982,10 @@ video {
 
   .xl\:font-mono {
     font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  }
+
+  .xl\:font-bitter {
+    font-family: Bitter, sans-serif;
   }
 
   .xl\:font-hairline {

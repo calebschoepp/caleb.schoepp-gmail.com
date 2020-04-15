@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 
-import DesktopCategoryPicker from "../components/DesktopCategoryPicker";
+import DesktopCategoryPicker from "../components/DesktopCategoryPicker.js";
+import MobileCategoryPicker from "../components/MobileCategoryPicker.js";
 
 import { getCategory } from "../util/api.js";
-import { CATEGORIES, DESKTOP_PICKER_GAP } from "../util/constants.js";
+import { DESKTOP_PICKER_GAP } from "../util/constants.js";
 
 function CategoryPickerContainer({ setPostIDs, scrollerWidth }) {
   const [category, setCategory] = useState("hot");
@@ -31,14 +32,18 @@ function CategoryPickerContainer({ setPostIDs, scrollerWidth }) {
     };
     fetchData();
   }, [category, setPostIDs]);
-  return (
-    <DesktopCategoryPicker
-      category={category}
-      setCategory={setCategory}
-      categories={CATEGORIES}
-      leftPosition={desktopPickerLeft}
-    />
-  );
+
+  if (window.innerWidth >= 1024) {
+    return (
+      <DesktopCategoryPicker
+        category={category}
+        setCategory={setCategory}
+        leftPosition={desktopPickerLeft}
+      />
+    );
+  }
+
+  return <MobileCategoryPicker category={category} setCategory={setCategory} />;
 }
 
 export default CategoryPickerContainer;
