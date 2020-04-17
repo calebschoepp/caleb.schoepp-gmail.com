@@ -3,7 +3,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        bitter: ["Bitter", "sans-serif"],
+        raleway: ["Raleway", "sans-serif"],
+        crete: ["Crete Round", "serif"],
       },
     },
   },

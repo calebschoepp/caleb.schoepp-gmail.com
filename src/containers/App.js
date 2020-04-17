@@ -10,7 +10,7 @@ function App() {
   const [scrollerWidth, setScrollerWidth] = useState([]);
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
   return (
-    <div className={`bg${BACKGROUND_COLOR} font-bitter`}>
+    <div className={`bg${BACKGROUND_COLOR} font-raleway`}>
       <Header setHamburgerOpen={setHamburgerOpen} />
       <CategoryPickerContainer
         setPostIDs={setPostIDs}

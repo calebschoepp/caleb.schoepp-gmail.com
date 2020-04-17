@@ -7,7 +7,7 @@ function Header({ setHamburgerOpen }) {
       className={`border-b border${BORDER_COLOR} fixed top-0 w-full z-30 bg-white`}
     >
       <div className="mx-auto max-w-2xl">
-        <div className="flex flew-row justify-between">
+        <div className="flex flew-row justify-between font-crete font-semibold">
           <div>
             <span className={`text-3xl text-gray-500 pl-1 lg:pl-0`}>r/</span>
             <span className={`text-3xl text${FONT_COLOR}`}>
