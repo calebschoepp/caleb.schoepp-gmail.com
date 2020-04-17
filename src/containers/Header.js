@@ -9,10 +9,12 @@ function Header({ setHamburgerOpen }) {
       <div className="mx-auto max-w-2xl">
         <div className="flex flew-row justify-between font-crete font-semibold">
           <div>
-            <span className={`text-3xl text-gray-500 pl-1 lg:pl-0`}>r/</span>
-            <span className={`text-3xl text${FONT_COLOR}`}>
-              photoshopbattles
-            </span>
+            <a href="/">
+              <span className={`text-3xl text-gray-500 pl-1 lg:pl-0`}>r/</span>
+              <span className={`text-3xl text${FONT_COLOR}`}>
+                photoshopbattles
+              </span>
+            </a>
           </div>
           <img
             className="pr-1 lg:hidden"
