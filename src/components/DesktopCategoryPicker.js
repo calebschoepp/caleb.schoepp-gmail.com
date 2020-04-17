@@ -16,13 +16,12 @@ function CategoryPickerContainer({ category, setCategory, leftPosition }) {
           );
         return (
           <div key={c.internalName}>
-            <button
+            <div
               className="text-xl"
               onClick={() => setCategory(c.internalName)}
             >
               {textContent}
-            </button>
-            <br />
+            </div>
           </div>
         );
       })}
