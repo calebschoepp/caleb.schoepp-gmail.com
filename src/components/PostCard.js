@@ -29,20 +29,18 @@ function PostCard({ post }) {
           src={post.photos[photoIndex] && post.photos[photoIndex].url}
         ></img>
         {photoIndex > 0 && (
-          <button
+          <img
+            className="rounded-full h-12 w-12 opacity-50 lg:hover:opacity-100 flex items-center justify-center bg-gray-100 absolute inset-y-0 left-0 my-auto ml-8"
+            src="/chevron-left.svg"
             onClick={() => setPhotoIndex(photoIndex - 1)}
-            className="rounded-full h-16 w-16 flex items-center justify-center bg-gray-200 absolute inset-y-0 left-0 my-auto ml-8"
-          >
-            {"<"}
-          </button>
+          ></img>
         )}
         {photoIndex < post.photos.length - 1 && (
-          <button
+          <img
+            className="rounded-full h-12 w-12 opacity-50 lg:hover:opacity-100 flex items-center justify-center bg-gray-100 absolute inset-y-0 right-0 my-auto mr-8"
+            src="/chevron-right.svg"
             onClick={() => setPhotoIndex(photoIndex + 1)}
-            className="rounded-full h-16 w-16 flex items-center justify-center bg-gray-200 absolute inset-y-0 right-0 my-auto mr-8"
-          >
-            {">"}
-          </button>
+          ></img>
         )}
       </div>
     </div>
