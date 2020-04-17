@@ -9,7 +9,7 @@ function CategoryPickerContainer({ category, setCategory, isOpen, close }) {
         <div className="fixed z-40 inset-0">
           <div className="flex flex-row justify-center items-center content-center h-full w-full">
             <div
-              className={`border border${BORDER_COLOR} bg-white p-2 text-center z-50`}
+              className={`border border${BORDER_COLOR} bg-white p-2 text-left z-50`}
             >
               {CATEGORIES.map((c) => {
                 const textContent =
@@ -33,7 +33,7 @@ function CategoryPickerContainer({ category, setCategory, isOpen, close }) {
                   </div>
                 );
               })}
-              <button onClick={() => close()}>X</button>
+              <img src="/x.svg" onClick={() => close()} />
             </div>
           </div>
         </div>
