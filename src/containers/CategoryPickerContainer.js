@@ -25,7 +25,6 @@ function CategoryPickerContainer({
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => {
-      console.log("cleanup");
       window.removeEventListener("resize", handleResize);
     };
   }, [scrollerWidth]);

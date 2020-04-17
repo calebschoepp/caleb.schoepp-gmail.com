@@ -4,6 +4,7 @@ import { TITLE_BAR_SIZE, BORDER_COLOR } from "../util/constants.js";
 
 function PostCard({ post }) {
   const [photoIndex, setPhotoIndex] = useState(0);
+  console.log(post);
 
   return (
     <div
@@ -11,11 +12,16 @@ function PostCard({ post }) {
     >
       <div
         style={{ height: `${TITLE_BAR_SIZE}px` }}
-        className={`bg-white flex flex-row justify-start items-center border-b border${BORDER_COLOR}`}
+        className={`bg-white flex flex-row justify-start items-center content-center border-b border${BORDER_COLOR} text-lg`}
       >
-        <span className="ml-1">{post.photos[photoIndex].text}</span>
-        <span className="mx-2">|</span>
-        <span>{post.photos[photoIndex].score}</span>
+        <a
+          src={post.postLink}
+          className="ml-1 overflow-hidden whitespace-no-wrap"
+        >
+          {post.photos[photoIndex].text}
+        </a>
+        <span className="mx-2 font-semibold">|</span>
+        <span className="mr-1">{post.photos[photoIndex].score}</span>
       </div>
       <div className="relative my-auto w-full">
         <img

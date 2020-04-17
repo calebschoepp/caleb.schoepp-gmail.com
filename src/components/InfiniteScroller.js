@@ -63,7 +63,6 @@ function InfiniteScroller({
           };
 
           const calculateRowHeight = ({ index }) => {
-            console.log("calc");
             if (!!posts[index]) {
               return (
                 photoWindowHeightFromPost(posts[index]) + CARD_HEIGHT_EXTRA
