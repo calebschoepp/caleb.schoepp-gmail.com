@@ -4,7 +4,6 @@ import { TITLE_BAR_SIZE, BORDER_COLOR } from "../util/constants.js";
 
 function PostCard({ post }) {
   const [photoIndex, setPhotoIndex] = useState(0);
-  console.log(post);
 
   return (
     <div
@@ -15,7 +14,7 @@ function PostCard({ post }) {
         className={`bg-white flex flex-row justify-start items-center content-center border-b border${BORDER_COLOR} text-lg`}
       >
         <a
-          src={post.postLink}
+          href={post.postLink}
           className="ml-1 overflow-hidden whitespace-no-wrap"
         >
           {post.photos[photoIndex].text}

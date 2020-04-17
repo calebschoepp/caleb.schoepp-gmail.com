@@ -32,6 +32,7 @@ function ListWrapper({
       rowHeight={rowHeight}
       onRowsRendered={onRowsRendered}
       rowRenderer={rowRenderer}
+      style={{ outline: "none" }}
     />
   );
 }
