@@ -1,9 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { TITLE_BAR_SIZE, BORDER_COLOR } from "../util/constants.js";
 
 function PostCard({ post }) {
   const [photoIndex, setPhotoIndex] = useState(0);
+
+  // Preload all the images for this postcard
+  useEffect(() => {
+    if (!post) {
+      return;
+    }
+    for (const photo of post.photos) {
+      const image = new Image();
+      image.src = photo.url;
+    }
+  }, [post]);
 
   return (
     <div
@@ -26,7 +37,7 @@ function PostCard({ post }) {
       <div className="relative my-auto w-full">
         <img
           className="block w-full"
-          alt={"Photo"}
+          alt={post.photos[photoIndex] && post.photos[photoIndex].text}
           src={post.photos[photoIndex] && post.photos[photoIndex].url}
         ></img>
         {photoIndex > 0 && (
