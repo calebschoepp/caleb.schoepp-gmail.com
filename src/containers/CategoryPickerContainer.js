@@ -12,7 +12,7 @@ function CategoryPickerContainer({
   hamburgerOpen,
   setHamburgerOpen,
 }) {
-  const [category, setCategory] = useState("hot");
+  const [category, setCategory] = useState("top:day");
   const [desktopPickerLeft, setDesktopPickerLeft] = useState(0);
 
   useEffect(() => {

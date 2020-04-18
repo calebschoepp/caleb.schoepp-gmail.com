@@ -16,6 +16,7 @@ function PostCard({ post }) {
         <a
           href={post.postLink}
           className="ml-1 overflow-hidden whitespace-no-wrap"
+          target="_blank"
         >
           {post.photos[photoIndex].text}
         </a>
