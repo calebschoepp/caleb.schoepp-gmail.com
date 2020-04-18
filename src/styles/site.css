@@ -24,3 +24,22 @@
     transform: rotate(360deg);
   }
 }
+
+.btn {
+  @apply text-xl;
+  @apply select-none;
+  @apply font-semibold;
+  @apply py-2;
+  @apply px-4;
+  @apply my-2;
+  @apply rounded;
+}
+
+.btn-on {
+}
+
+.btn-off {
+}
+
+.btn-onf:hover {
+}

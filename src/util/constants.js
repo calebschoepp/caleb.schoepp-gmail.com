@@ -2,12 +2,12 @@
 export const CATEGORIES = [
   { internalName: "hot", externalName: "Hot" },
   { internalName: "new", externalName: "New" },
+  { internalName: "rising", externalName: "Rising" },
   { internalName: "top:day", externalName: "Top ~ Today" },
   { internalName: "top:week", externalName: "Top ~ This Week" },
   { internalName: "top:month", externalName: "Top ~ This Month" },
   { internalName: "top:year", externalName: "Top ~ This Year" },
   { internalName: "top:all", externalName: "Top ~ All Time" },
-  { internalName: "rising", externalName: "Rising" },
 ];
 export const NUMBER_LOADING_CARDS = 3;
 
