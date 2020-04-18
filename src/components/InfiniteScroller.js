@@ -27,7 +27,11 @@ function InfiniteScroller({
     let content;
 
     if (!isRowLoaded({ index })) {
-      content = "Loading...";
+      content = (
+        <div className="flex justify-center items-center content-center h-full">
+          <div className="lds-dual-ring"></div>
+        </div>
+      );
     } else if (posts[index]) {
       content = <PostCard post={posts[index]} />;
     }
