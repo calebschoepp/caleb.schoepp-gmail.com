@@ -11,7 +11,7 @@ function Header({ setHamburgerOpen }) {
           <div>
             <a href="/">
               <span className={`text-3xl text-gray-500 pl-1 lg:pl-0`}>r/</span>
-              <span className={`text-3xl text${FONT_COLOR}`}>
+              <span className={`text-3xl text${FONT_COLOR} hover:text-_purple`}>
                 photoshopbattles
               </span>
             </a>
