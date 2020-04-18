@@ -17,7 +17,7 @@ function CategoryPickerContainer({ category, setCategory, leftPosition }) {
         return (
           <div key={c.internalName}>
             <div
-              className="text-xl"
+              className="text-xl select-none"
               onClick={() => setCategory(c.internalName)}
             >
               {textContent}
