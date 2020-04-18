@@ -5,14 +5,19 @@ import { TITLE_BAR_SIZE, BORDER_COLOR } from "../util/constants.js";
 function PostCard({ post }) {
   const [photoIndex, setPhotoIndex] = useState(0);
 
-  // Preload all the images for this postcard
+  // Preload first 4 images of the postcard
   useEffect(() => {
     if (!post) {
       return;
     }
+    let i = 0;
     for (const photo of post.photos) {
+      if (i >= 4) {
+        break;
+      }
       const image = new Image();
       image.src = photo.url;
+      i++;
     }
   }, [post]);
 
