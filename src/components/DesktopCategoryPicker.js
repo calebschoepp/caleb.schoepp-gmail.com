@@ -9,6 +9,9 @@ const onCSS =
 function CategoryPickerContainer({ category, setCategory, leftPosition }) {
   return (
     <div className={`fixed`} style={{ left: `${leftPosition}px`, top: "80px" }}>
+      <h1 className="text-lg text-gray-800 font-semibold my-1">
+        Top Posts of:
+      </h1>
       {CATEGORIES.map((c) => {
         let css;
         if (c.internalName === category) {

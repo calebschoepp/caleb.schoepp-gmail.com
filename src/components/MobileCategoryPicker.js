@@ -14,6 +14,9 @@ function CategoryPickerContainer({ category, setCategory, isOpen, close }) {
         <div className="fixed z-40 inset-0">
           <div className="flex flex-row justify-center items-center content-center h-full w-full">
             <div className={`p-2 text-center z-50`}>
+              <h1 className="text-lg text-gray-800 font-semibold my-1 bg-gray-200 border border-_purple shadow-lg rounded-full py-2 px-4">
+                Top Posts of:
+              </h1>
               {CATEGORIES.map((c) => {
                 let css;
                 if (c.internalName === category) {
