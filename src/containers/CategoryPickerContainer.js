@@ -14,6 +14,7 @@ function CategoryPickerContainer({
 }) {
   const [category, setCategory] = useState("top:day");
   const [desktopPickerLeft, setDesktopPickerLeft] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -30,12 +31,22 @@ function CategoryPickerContainer({
   }, [scrollerWidth]);
 
   useEffect(() => {
+    setLoading(true);
     const fetchData = async () => {
       const res = await getCategory(category);
       setPostIDs(res.posts);
+      setLoading(false);
     };
     fetchData();
   }, [category, setPostIDs]);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center content-center w-full h-screen">
+        <div className="lds-dual-ring"></div>
+      </div>
+    );
+  }
 
   if (window.innerWidth >= 1024) {
     return (
